@@ -1,0 +1,101 @@
+describe("Timepicker directive tests: ", function() {
+  var mockScope
+  var compileService
+  
+  beforeEach(angular.mock.module("timepicker"))
+
+  beforeEach(angular.mock.inject(function($rootScope, $compile) {
+    mockScope = $rootScope.$new()
+    compileService = $compile
+	mockScope.timeValue = new Date()
+    mockScope.minTime = new Date()
+    mockScope.minTime.setHours(9)
+    mockScope.minTime.setMinutes(0)
+    mockScope.minTime.setSeconds(0)
+    mockScope.maxTime = new Date()
+    mockScope.maxTime.setHours(17)
+    mockScope.maxTime.setMinutes(30)
+    mockScope.maxTime.setSeconds(0)
+  }))
+
+  it("Generates default timepicker elements", function(){
+    var compileFn = compileService("<div my-timepicker value='timeValue'></div>")
+    var elem = compileFn(mockScope)
+    mockScope.$digest()
+    expect(elem.children().length).toEqual(2)
+    //expect(elem.children().eq(1).children().length).toEqual(12)
+    //expect(elem.children().eq(1).find("option").eq(0).text()).toEqual('01')
+    //expect(elem.children().eq(1).find("option").eq(11).text()).toEqual('12')
+  })
+
+  it("Generates timepicker elements for format hhmmss", function(){
+    var compileFn = compileService("<div my-timepicker format='hhmmss' value='timeValue'></div>")
+    var elem = compileFn(mockScope)
+    mockScope.$digest()
+    expect(elem.children().length).toEqual(3)
+    //expect(elem.text()).toEqual('010203040506070809101112')
+  })
+
+  it("Generates timepicker elements for format Hours: hh Minutes: mm", function(){
+    var compileFn = compileService("<div my-timepicker format='Hours: hh Minutes: mm' value='timeValue'></div>")
+    var elem = compileFn(mockScope)
+    mockScope.$digest()
+    expect(elem.text()).toEqual('Hours:  Minutes: ')
+    expect(elem.children().length).toEqual(2)
+    //expect(elem.children().eq(1).children().length).toEqual(12)
+    //expect(elem.children().eq(1).find("option").eq(0).text()).toEqual('January')
+    //expect(elem.children().eq(1).find("option").eq(11).text()).toEqual('December')
+  })
+
+  it("sets a valid time", function(){
+    mockScope.timeValue = new Date()
+    mockScope.minTime = new Date()
+    mockScope.minTime.setHours(0)
+    mockScope.minTime.setMinutes(0)
+    mockScope.minTime.setSeconds(0)
+    mockScope.maxTime = new Date()
+    mockScope.maxTime.setHours(23)
+    mockScope.maxTime.setMinutes(59)
+    mockScope.maxTime.setSeconds(59)
+    var compileFn = compileService("<div my-timepicker min-time='minTime' max-time='maxTime' value='timeValue'></div>")
+    var elem = compileFn(mockScope)
+    mockScope.$digest()
+  })
+
+  it("Generates timepicker elements with timeValue < minTime", function(){
+    mockScope.timeValue = new Date()
+    mockScope.timeValue.setHours(0)
+    mockScope.timeValue.setMinutes(0)
+    mockScope.timeValue.setSeconds(0)
+    mockScope.minTime = new Date()
+    mockScope.minTime.setHours(12)
+    mockScope.minTime.setMinutes(0)
+    mockScope.minTime.setSeconds(0)
+    mockScope.maxTime = new Date()
+    mockScope.maxTime.setHours(23)
+    mockScope.maxTime.setMinutes(59)
+    mockScope.maxTime.setSeconds(59)
+    var compileFn = compileService("<div my-timepicker min-time='minTime' max-time='maxTime' value='timeValue'></div>")
+    var elem = compileFn(mockScope)
+    mockScope.$digest()
+  })
+
+  it("Generates timepicker elements with timeValue > maxTime", function(){
+    mockScope.timeValue = new Date()
+    mockScope.timeValue.setHours(12)
+    mockScope.timeValue.setMinutes(0)
+    mockScope.timeValue.setSeconds(0)
+    mockScope.minTime = new Date()
+    mockScope.minTime.setHours(0)
+    mockScope.minTime.setMinutes(0)
+    mockScope.minTime.setSeconds(0)
+    mockScope.maxTime = new Date()
+    mockScope.maxTime.setHours(1)
+    mockScope.maxTime.setMinutes(0)
+    mockScope.maxTime.setSeconds(0)
+    var compileFn = compileService("<div my-timepicker min-time='minTime' max-time='maxTime' value='timeValue'></div>")
+    var compileFn = compileService("<div my-timepicker min-time='minTime' max-time='maxTime' value='timeValue'></div>")
+    var elem = compileFn(mockScope)
+    mockScope.$digest()
+  })
+})
