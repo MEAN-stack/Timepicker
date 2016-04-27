@@ -18,19 +18,11 @@ angular.module("timepicker", ["timepickerTemplate"])
       var isValid = function(date) {
 
         if (scope.dtMin) {
-          // make sure we are comparing dates with the same day
-          date.setDate(scope.dtMin.getDate())
-          date.setMonth(scope.dtMin.getMonth())
-          date.setFullYear(scope.dtMin.getFullYear())
           if (date.getTime() < scope.dtMin.getTime()) {
             return false
           }
         }
         if (scope.dtMax) {
-          // make sure we are comparing dates with the same day
-          date.setDate(scope.dtMax.getDate())
-          date.setMonth(scope.dtMax.getMonth())
-          date.setFullYear(scope.dtMax.getFullYear())
           if (date.getTime() > scope.dtMax.getTime()) {
             return false
           }
@@ -107,7 +99,7 @@ angular.module("timepicker", ["timepickerTemplate"])
       if (attrs['format']) {
         timeFormat = attrs['format']
       }
-      var template = ""
+      var template = "<style>.timepicker {border-radius:0; width: auto; display: inline-block;}</style>"
       var showHour = /hh/.test(timeFormat)
       var showMinute = /mm/.test(timeFormat)
       var showSecond = /ss/.test(timeFormat)
