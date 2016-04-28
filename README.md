@@ -1,6 +1,20 @@
 # Timepicker
 Simple timepicker directive for AngularJS
 
+## Usage
+
+```HTML
+<div my-timepicker format="hh : mm" value="timeValue" min-time="minTime" max-time="maxTime"></div>
+```
+### Parameters
+`format`
+- `hh` hours
+- `mm` minutes
+- `ss` seconds
+`value` a Date object
+`min-time` a Date object
+`max-time` a Date object
+
 ## Demo
 
 http://mean-stack.github.io/timepicker/timepicker1.html
