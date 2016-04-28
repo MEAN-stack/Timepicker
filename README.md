@@ -11,8 +11,11 @@ Simple timepicker directive for AngularJS
 - `hh` hours
 - `mm` minutes
 - `ss` seconds
+
 `value` a Date object
+
 `min-time` a Date object
+
 `max-time` a Date object
 
 ## Demo
