@@ -4,11 +4,12 @@ Simple timepicker directive for AngularJS
 ## Usage
 
 ```HTML
-<div my-timepicker format="hh : mm" value="timeValue" min-time="minTime" max-time="maxTime"></div>
+<div my-timepicker format="HH : mm" value="timeValue" min-time="minTime" max-time="maxTime"></div>
 ```
 ### Parameters
 `format`
-- `hh` hours
+- `HH` hours (24-hour clock)
+- `hh` hours (12-hour clock)
 - `mm` minutes
 - `ss` seconds
 
