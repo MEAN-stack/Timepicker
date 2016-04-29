@@ -8,15 +8,17 @@
       angular.module("timepickerApp", ["timepicker"])
       .controller("timepickerCtrl", function($scope) {
         $scope.minTime = new Date()
-        $scope.minTime.setHours(9)
+        $scope.minTime.setHours(6)
         $scope.minTime.setMinutes(0)
         $scope.minTime.setSeconds(0)
         $scope.maxTime = new Date()
-        $scope.maxTime.setHours(17)
+        $scope.maxTime.setHours(20)
         $scope.maxTime.setMinutes(30)
         $scope.maxTime.setSeconds(0)
         $scope.timeValue = new Date()
-        $scope.timeValue.setHours(10)
+        $scope.timeValue.setHours(12)
+        $scope.timeValue.setMinutes(0)
+        $scope.timeValue.setSeconds(0)
 
         $scope.incSecond = function() {
           $scope.timeValue.setTime($scope.timeValue.getTime() + 1000)
@@ -29,7 +31,19 @@
         $scope.incHour = function() {
           $scope.timeValue.setTime($scope.timeValue.getTime() + 60*60*1000)
         }
-	  })
+
+        $scope.decSecond = function() {
+          $scope.timeValue.setTime($scope.timeValue.getTime() - 1000)
+        }
+
+        $scope.decMinute = function() {
+          $scope.timeValue.setTime($scope.timeValue.getTime() - 60*1000)
+        }
+
+        $scope.decHour = function() {
+          $scope.timeValue.setTime($scope.timeValue.getTime() - 60*60*1000)
+        }
+      })
 	</script>
   </head>
   <body ng-controller="timepickerCtrl">
@@ -54,8 +68,15 @@
     <div style="margin: 20px;">
 	  <span><strong>Selected time:</strong> {{timeValue | date:'shortTime'}}</span>
 	</div>
-    <button id="incHour" class="btn" ng-click="incHour()" style="margin-left: 20px">Hours++</button>
-    <button id="incMin" class="btn" ng-click="incMinute()" style="margin-left: 20px">Minutes++</button>
-    <button id="incSec" class="btn" ng-click="incSecond()" style="margin-left: 20px">Seconds++</button>
+    <div style="margin:20px;">
+      <button id="incHour" class="btn" ng-click="incHour()" style="margin-left: 20px">Hours++</button>
+      <button id="incMin" class="btn" ng-click="incMinute()" style="margin-left: 20px">Minutes++</button>
+      <button id="incSec" class="btn" ng-click="incSecond()" style="margin-left: 20px">Seconds++</button>
+	</div>
+    <div style="margin:20px;">
+      <button id="deHour" class="btn" ng-click="decHour()" style="margin-left: 20px">Hours--</button>
+      <button id="decMin" class="btn" ng-click="decMinute()" style="margin-left: 20px">Minutes--</button>
+      <button id="decSec" class="btn" ng-click="decSecond()" style="margin-left: 20px">Seconds--</button>
+    </div>
   </body>
 </html>
